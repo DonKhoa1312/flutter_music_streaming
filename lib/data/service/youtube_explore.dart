@@ -31,7 +31,7 @@ class MyYoutubeExplore {
     var video = await _youtubeExplode.videos.get(youtube_watch_url + id);
     var relatedVideos = await _youtubeExplode.videos.getRelatedVideos(video);
 
-    // Lấy video liên quan đầu tiên, nếu có
+ //lấy bản nhạc liên quan kế tiếp
     if (relatedVideos!.length>0) {
       String newSongid = relatedVideos[0].id.value;
       return explodeformlink(newSongid);

@@ -1,46 +1,39 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_music_streaming/core/until/Colorhex.dart';
+import 'package:flutter_music_streaming/core/constants/constants.dart';
+import 'package:flutter_music_streaming/core/widget/AppDefalutTabcontroller.dart';
+import 'package:flutter_music_streaming/view/home.dart';
+import 'package:flutter_music_streaming/view/libarary.dart';
+import 'package:flutter_music_streaming/view/search.dart';
+import 'package:flutter_music_streaming/view/wellcome.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
-  ]).then(
-    (value) => runApp(_Flutter_Music_Streaming()),
-  );
+  ]).then((value) => runApp(_MyApp()));
 }
 
-class _Flutter_Music_Streaming extends StatefulWidget {
-  const _Flutter_Music_Streaming({super.key});
+class _MyApp extends StatelessWidget {
+  const _MyApp({super.key});
 
-  @override
-  State<_Flutter_Music_Streaming> createState() =>
-      __Flutter_Music_StreamingState();
-}
-
-class __Flutter_Music_StreamingState extends State<_Flutter_Music_Streaming> {
   @override
   Widget build(BuildContext context) {
-    final isdarkTheme = Theme.of(context).brightness == Brightness.dark;
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness:
-            isdarkTheme ? Brightness.light : Brightness.dark,
-        statusBarBrightness: !kIsWeb && Platform.isAndroid
-            ? Brightness.light
-            : Brightness.dark));
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return MaterialApp(
-      
-      title: "music streaming",
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(),
-      home: Scaffold(
-        body: Center(
-          child: Text("Hello world"),
+        theme: normalTheme,
+      home: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+            
+          backgroundColor: Colorhex("1E1E1E"),
+          body: Welcome(),
+          
+          // TabBarView(children: [Home(),Search(),Library()]),
+          // bottomNavigationBar: Apptabbar(),
         ),
       ),
     );
